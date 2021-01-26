@@ -9,13 +9,16 @@ class App extends Component {
       <Header />
         <button>Add</button>
         <div>
-          <span>Name</span> 
+        <div> Prahalad </div>
+        <div> Prahalad </div>
+          {/* <span>Name</span> 
           <br></br>
-          <span>Phone</span>
+          <span>Phone</span> */}
         </div>
       </div>
     );
   }
 }
+
 
 export default App;
