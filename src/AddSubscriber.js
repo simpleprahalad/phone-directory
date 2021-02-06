@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
 import Header from './Header'
 import './AddSubscriber.css'
+import { Link } from 'react-router-dom';
 
-class AddSubcriber extends Component {
+class AddSusbscriber extends Component {
 
     constructor() {
         super();
@@ -22,24 +23,25 @@ class AddSubcriber extends Component {
 
     onFormSubmitted = (e) => {
         e.preventDefault();
-        this.props.addSubscibeHandler(this.state)
+        this.props.addSubscriberHandler(this.state)
         this.setState({id: 0, name: '', phone: ''})
+        this.props.history.push("/");
     }
 
     render() {
         const {name, phone} = this.state;
         return (
             <div className="component-container">
-                <Header heading="Add Subsciber" />
+                <Header heading="Add Subscriber" />
                 <div className="component-body-container">
-                    <button className="custom-btn">Back</button>
+                    <Link to='/'><button className="custom-btn">Back</button></Link>
                     <form className="subscriber-form" onSubmit={this.onFormSubmitted.bind(this)}>
                         <label htmlFor="name" className="label-contol">Name: </label> <br/>
                         <input id="name" type="text" className="input-control" name="name" onChange={this.inputChangedHandler}/> <br/> <br/>
                         <label htmlFor="phone" className="label-contol">Phone: </label> <br/>
                         <input id="phone" type="text" className="input-control" name="phone" onChange={this.inputChangedHandler}/> <br/> <br/>
                         <div className="subscriber-info-container">
-                            <span className="subsciber-to-add-heading">Subsciber to be added: </span> <br/>
+                            <span className="subscriber-to-add-heading">Subsciber to be added: </span> <br/>
                             <span className="subscriber-info">Name: {name} </span> <br />
                             <span className="subscriber-info">Phone: {phone} </span>
                         </div>
@@ -51,4 +53,4 @@ class AddSubcriber extends Component {
     }
 }
 
-export default AddSubcriber;
+export default AddSusbscriber;

@@ -1,6 +1,7 @@
 import { Component } from "react";
-import AddSubcriber from "./AddSubscriber";
+import AddSubscriber from "./AddSubscriber";
 import ShowSubscribers from "./ShowSubscribers";
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 class PhoneDirectory extends Component {
 
@@ -22,22 +23,25 @@ class PhoneDirectory extends Component {
         }
     }
 
-    addSubsciberHandler = (newSubsciber) => {
-        let subscibersList = this.state.subscribersList;
-        if(subscibersList.length > 0) {
-            newSubsciber.id = subscibersList[subscibersList.length - 1].id + 1;
+    addSubscriberHandler = (newSubscriber) => {
+        let subscribersList = this.state.subscribersList;
+        if (subscribersList.length > 0) {
+            newSubscriber.id = subscribersList[subscribersList.length - 1].id + 1;
         } else {
-            newSubsciber.id = 1;
+            newSubscriber.id = 1;
         }
-        subscibersList.push(newSubsciber);
-        this.setState({subscibersList: subscibersList})
-        console.log(this.state.subscribersList)
+        subscribersList.push(newSubscriber);
+        this.setState({ subscribersList: subscribersList });
     }
 
     render() {
         return (
-            // <AddSubcriber addSubscibeHandler={this.addSubsciberHandler}/>
-            <ShowSubscribers subscibersList={this.state.subscribersList} />
+            <Router>
+                <div>
+                    <Route exact path='/' render={(props) => <ShowSubscribers {...props} subscribersList={this.state.subscribersList} /> } /> 
+                    <Route exact path='/add' render={({history}, props) => <AddSubscriber history={history} {...props} addSubscriberHandler={this.addSubscriberHandler} /> } /> 
+                </div>
+            </Router>
         )
     }
 }
